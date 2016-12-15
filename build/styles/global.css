@@ -1,4 +1,4 @@
-.cc_expandingCard_appContainer .cc-profileCard {
+.cc-expandingCard-appContainer .cc-profileCard {
   position: relative;
   transition: all 0.2s ease-in-out 0s;
   border: solid 1px #e2e2e2;
@@ -15,7 +15,7 @@
   max-width: 650px;
   left: 50%;
   transform: translate3D(-50%, 0, 0); }
-  .cc_expandingCard_appContainer .cc-profileCard h2 {
+  .cc-expandingCard-appContainer .cc-profileCard h2 {
     font-family: "Guardian Sans Cond", Helvetica, sanserif;
     font-size: 24px;
     line-height: 22px;
@@ -23,14 +23,14 @@
     margin: 0;
     margin-bottom: 16px;
     margin-left: 50%; }
-  .cc_expandingCard_appContainer .cc-profileCard h4 {
+  .cc-expandingCard-appContainer .cc-profileCard h4 {
     font-family: "Guardian Sans", Helvetica, sanserif;
     font-size: 20px;
     line-height: 24px;
     margin: 0;
     margin-bottom: 24px;
     margin-left: 50%; }
-  .cc_expandingCard_appContainer .cc-profileCard p.cc-cardtext {
+  .cc-expandingCard-appContainer .cc-profileCard p.cc-cardtext {
     transition: all 0.2s ease-in-out 0s;
     font-family: "Merriweather light", Georgia, serif;
     color: #000;
@@ -40,7 +40,7 @@
     overflow: hidden;
     margin-left: 50%;
     opacity: 0; }
-  .cc_expandingCard_appContainer .cc-profileCard div.cc-button {
+  .cc-expandingCard-appContainer .cc-profileCard div.cc-button {
     position: relative;
     display: inline-block;
     width: auto;

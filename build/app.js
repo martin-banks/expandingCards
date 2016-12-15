@@ -9,24 +9,9 @@
 	var bodyTemplate = require('./bodyTemplate');
 	var headerTemplate = require('./headerTemplate');
 
-	/*let cardTitle = (text)=> `<h2>${text}</h2>`
- let cardIntro = (text)=> `<h4>${text}</h4>`
- let cardKicker = (text)=> `<h6 class="cc_kicker">${text}</h6>`*/
-	/*let cardText = (text)=> `<p class='cc-cardtext'>${text}</p>`*/
 	var button = function button(icon) {
 		return '<div class="cc-button">' + icon + '</div>';
 	};
-
-	/*let container = props=> `
- 	<div 
- 		class="cc-profileCard" 
- 		style="background-image:url(../images/${props.image})"
- 		data-key="${props.key}"
- 		data-state='closed'
- 	>
- 		${props.content}
- 	</div>
- `*/
 
 	var cardContent = [headerTemplate(content.cards[0].header), bodyTemplate(content.cards[0].body)].join('');
 
@@ -34,37 +19,9 @@
 		return '\n\t\t<div class="cc-cardContainer">\n\t\t\t' + cardContent + '\n\t\t</div>\n\t';
 	};
 
-	/*	let cardTemplate = (props)=>{
- 		return container({
- 			image: props.image,
- 			key: props.key,
- 			content: [
- 				props.kicker.length>0 ? cardKicker(props.kicker) : '',
- 				props.title.length>0 ? cardTitle(props.title) : '',
- 				props.intro.length>0 ? cardIntro(props.intro) : '',
- 				cardText(''),
- 				button(content.cta.showmore)
- 			].join('')
- 		})
- 	}
- 
- 	let composeAllCards = ()=>{
- 		let keys = Object.keys(content.articles)
- 		return keys.map(key=>{
- 			let article = content.articles[key]
- 			return cardTemplate({
- 				kicker: article.kicker,
- 				title: article.title,
- 				image: article.image,
- 				intro: article.intro,
- 				key: key
- 			})
- 		}).join('')
- 	}*/
+	document.querySelector('.cc-expandingCard-appContainer').innerHTML = cardContainer();
 
-	document.querySelector('.cc_expandingCard_appContainer').innerHTML = cardContainer();
-
-	util.delegate('.cc_expandingCard_appContainer', 'click', '.cc-profileCard', function (e) {
+	util.delegate('.cc-expandingCard-appContainer', 'click', '.cc-profileCard', function (e) {
 		var thisCard = util.closest(e.target, '.cc-profileCard');
 		var thisKey = thisCard.getAttribute('data-key');
 
@@ -179,7 +136,7 @@ var cardIntro = function cardIntro(text) {
 	return '<h4>' + text + '</h4>';
 };
 var cardKicker = function cardKicker(text) {
-	return '<h6 class="cc_kicker">' + text + '</h6>';
+	return '<h6 class="cc-kicker">' + text + '</h6>';
 };
 
 module.exports = function (header) {

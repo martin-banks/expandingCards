@@ -1,7 +1,7 @@
 "use strict"
 let cardTitle = (text)=> `<h2>${text}</h2>`
 let cardIntro = (text)=> `<h4>${text}</h4>`
-let cardKicker = (text)=> `<h6 class="cc_kicker">${text}</h6>`
+let cardKicker = (text)=> `<h6 class="cc-kicker">${text}</h6>`
 
 module.exports = header => {
 	console.log('checking header', header)
