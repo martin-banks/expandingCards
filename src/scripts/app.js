@@ -3,14 +3,16 @@
 
 	const util = require('./utility')
 	let content = require('./content')
+	let bodyTemplate = require('./bodyTemplate')
+	let headerTemplate = require('./headerTemplate')
 
-	let cardTitle = (text)=> `<h2>${text}</h2>`
+	/*let cardTitle = (text)=> `<h2>${text}</h2>`
 	let cardIntro = (text)=> `<h4>${text}</h4>`
-	let cardKicker = (text)=> `<h6 class="cc_kicker">${text}</h6>`
-	let cardText = (text)=> `<p class='cc-cardtext'>${text}</p>`
+	let cardKicker = (text)=> `<h6 class="cc_kicker">${text}</h6>`*/
+	/*let cardText = (text)=> `<p class='cc-cardtext'>${text}</p>`*/
 	let button = (icon)=> `<div class="cc-button">${icon}</div>`
 
-	let container = props=> `
+	/*let container = props=> `
 		<div 
 			class="cc-profileCard" 
 			style="background-image:url(../images/${props.image})"
@@ -19,9 +21,22 @@
 		>
 			${props.content}
 		</div>
+	`*/
+
+	
+
+	let cardContent = [
+		headerTemplate(content.cards[0].header),
+		bodyTemplate(content.cards[0].body)
+	].join('')
+
+	let cardContainer = ()=>`
+		<div class="cc-cardContainer">
+			${cardContent}
+		</div>
 	`
 
-	let cardTemplate = (props)=>{
+/*	let cardTemplate = (props)=>{
 		return container({
 			image: props.image,
 			key: props.key,
@@ -47,12 +62,15 @@
 				key: key
 			})
 		}).join('')
-	}
+	}*/
 
 
-	document.querySelector('.cc_expandingCard_appContainer').innerHTML = [
-		composeAllCards()
-	].join('')
+	document.querySelector('.cc_expandingCard_appContainer').innerHTML = cardContainer()
+
+
+
+
+
 
 
 	util.delegate('.cc_expandingCard_appContainer', 'click', '.cc-profileCard', (e)=>{

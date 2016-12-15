@@ -11,21 +11,25 @@ module.exports = {
 		image: ''
 	},
 
-	cards: {
-		a: {
-			intro: {
-				kicker: '',
-				title: 'Card title',
-				intro: 'card intro',	
+	cards: [
+		{
+			header: {
+				intro: {
+					kicker: '',
+					title: 'Card title',
+					intro: 'card intro'
+				},
+				displayImage: {
+					type: 'inline',
+					image: ''
+				},
 			},
-			displayImage: {
-				image: '',
-			},
+			
 			body: [
 				'Some paragraph of text',
 				{
 					type: 'image', 
-					name: 'image.jpg',
+					name: 'testing.png',
 					caption: 'Image caption',
 					credit: 'image credit'					
 				},
@@ -42,13 +46,13 @@ module.exports = {
 				},
 				{
 					type: 'linkButton',
-					text: '',
+					text: 'link text',
 					link: ''
 				}
 			] 
 		}/*end of card*/
 
-	}
+	]
 
 	
 }
