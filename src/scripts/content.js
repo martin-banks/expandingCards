@@ -20,7 +20,7 @@ module.exports = {
 			},
 			displayImage: {
 				image: '',
-			}
+			},
 			body: [
 				'Some paragraph of text',
 				{

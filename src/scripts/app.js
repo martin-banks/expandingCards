@@ -19,7 +19,7 @@
 		>
 			${props.content}
 		</div>
-		`
+	`
 
 	let cardTemplate = (props)=>{
 		return container({
