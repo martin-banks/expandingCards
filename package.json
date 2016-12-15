@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "watch": "watchify ./app.js -o ./build/app.js -t [ babelify --presets [es2015] ]"
+    "watch": "watchify ./src/scripts/app.js -o ./build/app.js -t [ babelify --presets [es2015] ]",
+    "watchsass": "sass --watch ./src/styles:./build/styles"
   },
   "keywords": [],
   "author": "",
