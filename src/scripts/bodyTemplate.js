@@ -10,15 +10,19 @@ const templates = {
 
 
 module.exports = bodyElements=>{
-	let templatedContent = bodyElements.map(elem=>{
-		console.log(elem, typeof elem)
-		if(typeof elem === 'string'){
-			return templates.par(elem)
-		} else if(typeof elem === 'object') {
-			let type = elem.type
-			return templates[type](elem)
-		}
-	}).join('')
+	if (!!bodyElements){
+		let templatedContent = bodyElements.map(elem=>{
+			if(typeof elem === 'string'){
+				return templates.par(elem)
+			} else if(typeof elem === 'object') {
+				let type = elem.type
+				return templates[type](elem)
+			}
+		}).join('')
 
-	return `<div class="cc-cardBodyCotnainer">${templatedContent}</div>` 
+		return templatedContent
+	} else {
+		return ''
+	}
+	
 }

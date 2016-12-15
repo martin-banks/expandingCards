@@ -1,0 +1,53 @@
+
+/* Metro section colors */
+$color-news: #268DCE
+$color-blue: #268DCE
+
+$color-sport: #ED9706
+$color-red: #ED9706
+
+$color-entertainment: #AA64A9
+$color-purple: #AA64A9
+
+$color-lifestyle: #ec3596
+$color-pink: #ec3596
+
+$color-business: #ED9706
+$color-orange: #ED9706
+
+$color-video: #72A427
+$color-green: #72A427
+
+
+
+/* Metro neutrals */
+$color-white: #FFFFFF
+$color-neutral-light: #f0f0f0
+$color-neutral-midlight: #cecece
+$color-neutral-middark: #747474
+$color-neutral-dark: #383838
+$color-black: #000000
+
+@function tint($color, $percentage)
+	@return mix(white, $color, $percentage)
+
+=background-neutral
+	background-color: tint($color-black)
+
+
+/* Metro tints */
+
+
+/* gradients */
+$fade-black-dark: rgba(0,0,0, 1.0), rgba(0,0,0, 0.0)
+$fade-black-mid: rgba(0,0,0, 0.6), rgba(0,0,0, 0.0)
+$fade-black-light: rgba(0,0,0, 0.3), rgba(0,0,0, 0.0)
+
+$fade-white-dark: rgba(255,255,255, 1.0), rgba(255,255,255, 0.0)
+$fade-white-mid: rgba(255,255,255, 0.6), rgba(255,255,255, 0.0)
+$fade-white-light: rgba(255,255,255, 0.3), rgba(255,255,255, 0.0)
+
+
+
+=fade-dark-up
+	background: linear-gradient(rgba($color-neutral-dark, 0), rgba($color-neutral-dark, 0.6))

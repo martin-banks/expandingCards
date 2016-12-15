@@ -13,31 +13,34 @@
 		return '<div class="cc-button">' + icon + '</div>';
 	};
 
-	var cardContent = [headerTemplate(content.cards[0].header), bodyTemplate(content.cards[0].body)].join('');
+	var cardContent = [headerTemplate(content.cards[0].header), '<div class="cc-cardBodyContainer">' + bodyTemplate(null) + '</div>', button(content.cta.showmore)].join('');
 
 	var cardContainer = function cardContainer() {
-		return '\n\t\t<div class="cc-cardContainer">\n\t\t\t' + cardContent + '\n\t\t</div>\n\t';
+		return '\n\t\t<div class="cc-cardContainer" data-state="closed">\n\t\t\t' + cardContent + '\n\t\t</div>\n\t';
 	};
 
 	document.querySelector('.cc-expandingCard-appContainer').innerHTML = cardContainer();
 
-	util.delegate('.cc-expandingCard-appContainer', 'click', '.cc-profileCard', function (e) {
-		var thisCard = util.closest(e.target, '.cc-profileCard');
+	util.delegate('.cc-expandingCard-appContainer', 'click', '.cc-cardContainer', function (e) {
+		var thisCard = util.closest(e.target, '.cc-cardContainer');
 		var thisKey = thisCard.getAttribute('data-key');
 
 		if (thisCard.getAttribute('data-state') === 'closed') {
 			thisCard.querySelector('.cc-button').innerHTML = content.cta.showless;
 			thisCard.setAttribute('data-state', 'open');
-			thisCard.querySelector('.cc-cardtext').innerHTML = content.articles[thisKey].text;
-			thisCard.querySelector('.cc-cardtext').style.opacity = 1;
-			thisCard.querySelector('.cc-cardtext').style.height = '100px';
+			thisCard.querySelector('.cc-cardBodyContainer').innerHTML = bodyTemplate(content.cards[0].body);
+			thisCard.querySelector('.cc-cardBodyContainer').style.opacity = 1;
+			thisCard.querySelector('.cc-cardBodyContainer').style.maxHeight = '1000px';
 			return;
 		} else if (thisCard.getAttribute('data-state') === 'open') {
 			thisCard.querySelector('.cc-button').innerHTML = content.cta.showmore;
 			thisCard.setAttribute('data-state', 'closed');
-			thisCard.querySelector('.cc-cardtext').innerHTML = '';
-			thisCard.querySelector('.cc-cardtext').style.opacity = '';
-			thisCard.querySelector('.cc-cardtext').style.height = '';
+			thisCard.querySelector('.cc-cardBodyContainer').style.opacity = '';
+			thisCard.querySelector('.cc-cardBodyContainer').style.maxHeight = '';
+			setTimeout(function () {
+				thisCard.querySelector('.cc-cardBodyContainer').innerHTML = bodyTemplate(null);
+			}, 500);
+
 			return;
 		}
 	});
@@ -57,17 +60,20 @@ var templates = {
 };
 
 module.exports = function (bodyElements) {
-	var templatedContent = bodyElements.map(function (elem) {
-		console.log(elem, typeof elem === 'undefined' ? 'undefined' : _typeof(elem));
-		if (typeof elem === 'string') {
-			return templates.par(elem);
-		} else if ((typeof elem === 'undefined' ? 'undefined' : _typeof(elem)) === 'object') {
-			var type = elem.type;
-			return templates[type](elem);
-		}
-	}).join('');
+	if (!!bodyElements) {
+		var templatedContent = bodyElements.map(function (elem) {
+			if (typeof elem === 'string') {
+				return templates.par(elem);
+			} else if ((typeof elem === 'undefined' ? 'undefined' : _typeof(elem)) === 'object') {
+				var type = elem.type;
+				return templates[type](elem);
+			}
+		}).join('');
 
-	return '<div class="cc-cardBodyCotnainer">' + templatedContent + '</div>';
+		return templatedContent;
+	} else {
+		return '';
+	}
 };
 
 },{"./template_crosshead":6,"./template_image":7,"./template_linkButton":8,"./template_list":9,"./template_par":10}],3:[function(require,module,exports){
@@ -106,7 +112,7 @@ module.exports = {
 
 		body: ['Some paragraph of text', {
 			type: 'image',
-			name: 'testing.png',
+			name: '16x9.jpg',
 			caption: 'Image caption',
 			credit: 'image credit'
 		}, {
@@ -130,13 +136,13 @@ module.exports = {
 "use strict";
 
 var cardTitle = function cardTitle(text) {
-	return '<h2>' + text + '</h2>';
+	return '<h2 class="cc-cardTitle">' + text + '</h2>';
 };
 var cardIntro = function cardIntro(text) {
-	return '<h4>' + text + '</h4>';
+	return '<h4 class="cc-cardIntro">' + text + '</h4>';
 };
 var cardKicker = function cardKicker(text) {
-	return '<h6 class="cc-kicker">' + text + '</h6>';
+	return '<h6 class="cc-cardKicker">' + text + '</h6>';
 };
 
 module.exports = function (header) {

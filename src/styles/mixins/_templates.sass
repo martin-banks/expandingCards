@@ -1,0 +1,53 @@
+@import colors
+
+
+=shadow-medium
+	box-shadow: 0 10px 20px -10px rgba(0,0,0, 0.6)
+
+=center-h
+	left: 50%
+	transform: translate3D(-50%,0,0)
+
+=center-v
+	top: 50%
+	transform: translate3D(0,-50%,0)
+
+=center-both
+	top: 50%
+	left: 50%
+	transform: translate3D(-50%,-50%,0)
+	
+
+
+
+=cardWithShadow
+	+shadow-medium
+	+center-h
+	position: relative
+	border: solid 1px #e2e2e2
+	border-radius: 4px
+	padding: 24px
+	margin-bottom: 24px
+	background-color: #ffffff
+	width: 100%
+	max-width: 650px
+
+
+
+=sansSerif
+	font-family: "Guardian Sans", Helvetica, sanserif
+	font-weight: 300
+	text-rendering: optimizeLegibility
+
+=sansSerifCondensed
+	font-family: "Guardian Sans Cond", Helvetica, sanserif
+	font-weight: 800
+	text-rendering: optimizeLegibility
+
+=serif
+	font-family: 'Merriweather light', Georgia, serif
+	text-rendering: optimizeLegibility
+
+
+=transitionQuick
+	transition: all 1s ease-in-out 0s

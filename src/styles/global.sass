@@ -1,65 +1,143 @@
+@import mixins/templates
+@import mixins/colors
+
+$button-height: 32px
+
 .cc-expandingCard-appContainer
-	.cc-profileCard
-		position: relative
-		transition: all 0.2s ease-in-out 0s
-		border: solid 1px #e2e2e2
-		border-radius: 4px
-		padding: 24px
+	+sansSerif
+	+transitionQuick
+	box-sizing: border-box
+
+	.cc-cardContainer
+		+cardWithShadow		
+
+	h2, h4, h6 
+		+sansSerif
+		margin: 0
+	
+	h2.cc-cardTitle
+		font-size: 24px
+		font-weight: 800
+		line-height: 22px
+		text-transform: uppercase
+		margin-bottom: 16px
+		color: $color-neutral-dark
+	
+	h3.cc-crosshead
+		text-transform: uppercase
+		margin-bottom: 8px
+		margin-top: 32px
+
+	h4.cc-cardIntro
+		font-size: 20px
+		font-weight: 300
+		line-height: 24px
 		margin-bottom: 24px
-		background-color: #fff
-		box-shadow: 0 10px 20px -10px rgba(0,0,0, 0.6)
-		font-family: "Guardian Sans", Helvetica, sanserif
-		background-position: center top
-		background-repeat: no-repeat
-		background-size: cover
-		
+
+	h6.cc-cardKicker
+		text-transform: uppercase
+		font-size: 16px
+		font-weight: 400
+		line-height: 14px
+		margin-bottom: 8px
+		color: $color-blue
+
+	p.cc-cardText
+		letter-spacing: 0.5px
+		font-size: 16px
+		line-height: 24px
+		margin: 0
+		margin-bottom: 16px
+
+	div.cc-cardBodyContainer
+		+sansSerif
+		position: relative
+		font-size: 16px
+		line-height: 24px
+		overflow: hidden	
+		height: auto
+		max-height: 0
+		opacity: 0
+
+	ul.cc-listContainer
+		padding-top: 16px
+		margin-bottom: 32px
+		padding: 0 32px
+	
+
+	div.cc-inlineImageContainer
+		position: relative
+		border: solid 1px $color-neutral-midlight
+		border-radius: 4px
+		div.cc-inlineImage
+			img
+				width: 100%
+		div.cc-imageCaptionContainer
+			position: absolute
+			bottom: 0
+			width: 100%
+			padding: 16px
+			+fade-dark-up
+			color: #ffffff
+			p
+				margin: 0
+			p.cc-caption
+				font-weight: 600
+				font-size: 14px
+				line-height: 16px
+				margin-bottom: 0
+			p.cc-credit
+				font-weight: 300
+				margin-bottom: 8px
+
+
+	div.cc-button
+		position: relative
+		right: 0
+		bottom: 0
+		display: inline-block
 		width: 100%
-		max-width: 650px
-		left: 50%
-		transform: translate3D(-50%,0,0)
+		color: $color-neutral-dark
+		text-align: right
+		font-size: 14px
+		line-height: 16px
+		letter-spacing: 2px
+		text-transform: uppercase
+		cursor: pointer
 
-		h2
-			font-family: "Guardian Sans Cond", Helvetica, sanserif
-			font-size: 24px
-			line-height: 22px
-			text-transform: uppercase
-			margin: 0
-			margin-bottom: 16px
-			margin-left: 50%
 
-		h4
-			font-family: "Guardian Sans", Helvetica, sanserif
-			font-size: 20px
-			line-height: 24px
-			margin: 0
+	a.cc-linkButton
+		text-decoration: none
+		padding: 0
+		color: $color-neutral-middark
+		font-weight: 400
+		div.cc-buttonTextContainer
+			+sansSerif
 			margin-bottom: 24px
-			margin-left: 50%
-
-		p.cc-cardtext
-			transition: all 0.2s ease-in-out 0s
-			font-family: 'Merriweather light', Georgia, serif
-			color: #000
-			font-size: 16px
-			line-height: 24px
-			height: 0
-			overflow: hidden
-			margin-left: 50%
-			opacity: 0
-
-		div.cc-button
 			position: relative
-			display: inline-block
-			width: auto
-			border: solid 1px rgba(0,0,0, 0.35)
-			border-radius: 4px
-			background-color: rgba(0,0,0, 0.3)
-			color: #fff
-			padding: 8px 16px
-			font-family: "Guardian Sans", Helvetica, sanserif
-			font-size: 14px
-			line-height: 16px
-			letter-spacing: 2px
-			text-transform: uppercase
-			cursor: pointer
-			margin-left: 50%
+			line-height: $button-height
+			height: $button-height
+			font-size: 16px
+			overflow: hidden
+			border: solid 1px $color-neutral-light
+			border-radius: 2px
+			vertical-align: middle
+			span.cc-buttonIcon
+				position: relative
+				vertical-align: baseline
+				background-color: $color-neutral-light
+				padding: $button-height 8px
+				margin-right: 8px
+				img
+					height: $button-height/2
+					vertical-align: middle
+
+
+		div.cc-buttonTextContainer:hover
+			background-color: $color-neutral-light
+			border-color: $color-neutral-midlight
+			color: $color-neutral-dark
+					
+
+
 

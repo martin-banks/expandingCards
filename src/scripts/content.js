@@ -27,7 +27,7 @@ module.exports = {
 				'Some paragraph of text',
 				{
 					type: 'image', 
-					name: 'testing.png',
+					name: '16x9.jpg',
 					caption: 'Image caption',
 					credit: 'image credit'					
 				},
