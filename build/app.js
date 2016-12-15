@@ -100,7 +100,7 @@ var templates = {
 };
 
 module.exports = function (bodyElements) {
-	var templateContent = bodyElements.map(function (elem) {
+	var templatedContent = bodyElements.map(function (elem) {
 		console.log(elem, typeof elem === 'undefined' ? 'undefined' : _typeof(elem));
 		if (typeof elem === 'string') {
 			return templates.par(elem);
@@ -110,7 +110,7 @@ module.exports = function (bodyElements) {
 		}
 	}).join('');
 
-	return templateContent;
+	return '<div class="cc-cardBodyCotnainer">' + templatedContent + '</div>';
 };
 
 },{"./template_crosshead":6,"./template_image":7,"./template_linkButton":8,"./template_list":9,"./template_par":10}],3:[function(require,module,exports){
@@ -138,11 +138,9 @@ module.exports = {
 
 	cards: [{
 		header: {
-			intro: {
-				kicker: '',
-				title: 'Card title',
-				intro: 'card intro'
-			},
+			kicker: 'kicker',
+			title: 'Card title',
+			intro: 'card intro',
 			displayImage: {
 				type: 'inline',
 				image: ''
@@ -185,8 +183,10 @@ var cardKicker = function cardKicker(text) {
 };
 
 module.exports = function (header) {
+	console.log('checking header', header);
 	var content = [!!header.kicker && header.kicker.length > 0 ? cardKicker(header.kicker) : '', !!header.title && header.title.length > 0 ? cardTitle(header.title) : '', !!header.intro && header.intro.length > 0 ? cardIntro(header.intro) : ''].join('');
 
+	console.log('header content tempalted', content);
 	return '<div class="cc-headerContainer">' + content + '</div>';
 };
 

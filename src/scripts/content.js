@@ -14,11 +14,9 @@ module.exports = {
 	cards: [
 		{
 			header: {
-				intro: {
-					kicker: '',
-					title: 'Card title',
-					intro: 'card intro'
-				},
+				kicker: 'kicker',
+				title: 'Card title',
+				intro: 'card intro',
 				displayImage: {
 					type: 'inline',
 					image: ''

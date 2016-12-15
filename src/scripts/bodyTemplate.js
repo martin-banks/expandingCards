@@ -10,7 +10,7 @@ const templates = {
 
 
 module.exports = bodyElements=>{
-	let templateContent = bodyElements.map(elem=>{
+	let templatedContent = bodyElements.map(elem=>{
 		console.log(elem, typeof elem)
 		if(typeof elem === 'string'){
 			return templates.par(elem)
@@ -20,5 +20,5 @@ module.exports = bodyElements=>{
 		}
 	}).join('')
 
-	return templateContent
+	return `<div class="cc-cardBodyCotnainer">${templatedContent}</div>` 
 }
