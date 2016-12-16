@@ -11,7 +11,8 @@
   font-weight: 300;
   text-rendering: optimizeLegibility;
   transition: all 1s ease-in-out 0s;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  overflow: hidden; }
   .cc-expandingCard-appContainer .cc-cardContainer {
     box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.6);
     left: 50%;
@@ -22,8 +23,8 @@
     padding: 24px;
     margin-bottom: 24px;
     background-color: #ffffff;
-    width: 100%;
-    max-width: 650px; }
+    max-width: 650px;
+    overflow: hidden; }
   .cc-expandingCard-appContainer h2, .cc-expandingCard-appContainer h4, .cc-expandingCard-appContainer h6 {
     font-family: "Guardian Sans", Helvetica, sanserif;
     font-weight: 300;
@@ -38,7 +39,7 @@
     color: #383838; }
   .cc-expandingCard-appContainer h3.cc-crosshead {
     text-transform: uppercase;
-    margin-bottom: 8px;
+    margin-bottom: 0;
     margin-top: 32px; }
   .cc-expandingCard-appContainer h4.cc-cardIntro {
     font-size: 20px;
@@ -68,7 +69,8 @@
     overflow: hidden;
     height: auto;
     max-height: 0;
-    opacity: 0; }
+    opacity: 0;
+    margin-bottom: 16px; }
   .cc-expandingCard-appContainer ul.cc-listContainer {
     padding-top: 16px;
     margin-bottom: 32px;
@@ -76,7 +78,8 @@
   .cc-expandingCard-appContainer div.cc-inlineImageContainer {
     position: relative;
     border: solid 1px #cecece;
-    border-radius: 4px; }
+    border-radius: 4px;
+    margin-bottom: 24px; }
     .cc-expandingCard-appContainer div.cc-inlineImageContainer div.cc-inlineImage img {
       width: 100%; }
     .cc-expandingCard-appContainer div.cc-inlineImageContainer div.cc-imageCaptionContainer {
@@ -97,18 +100,28 @@
         font-weight: 300;
         margin-bottom: 8px; }
   .cc-expandingCard-appContainer div.cc-button {
-    position: relative;
+    position: absolute;
     right: 0;
     bottom: 0;
     display: inline-block;
     width: 100%;
-    color: #383838;
+    color: #747474;
     text-align: right;
-    font-size: 14px;
+    font-size: 12px;
+    font-weight: 600;
     line-height: 16px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    cursor: pointer; }
+    cursor: pointer;
+    padding: 16px; }
+    .cc-expandingCard-appContainer div.cc-button i.material-icons {
+      vertical-align: middle;
+      line-height: 16px;
+      font-size: 24px;
+      margin-left: 8px; }
+  .cc-expandingCard-appContainer .cc-appDesktop div.cc-button:hover {
+    background-color: #f0f0f0;
+    color: #383838; }
   .cc-expandingCard-appContainer a.cc-linkButton {
     text-decoration: none;
     padding: 0;
@@ -136,9 +149,29 @@
         .cc-expandingCard-appContainer a.cc-linkButton div.cc-buttonTextContainer span.cc-buttonIcon img {
           height: 16px;
           vertical-align: middle; }
-    .cc-expandingCard-appContainer a.cc-linkButton div.cc-buttonTextContainer:hover {
+    .cc-expandingCard-appContainer a.cc-linkButton .cc-appDesktop div.cc-buttonTextContainer:hover {
       background-color: #f0f0f0;
       border-color: #cecece;
       color: #383838; }
+  .cc-expandingCard-appContainer div.cc-headerContainer {
+    margin-bottom: 24px;
+    overflow: auto; }
+  .cc-expandingCard-appContainer div.cc-headerTextContainer {
+    position: relative; }
+  .cc-expandingCard-appContainer div.cc-headerImageContainer {
+    position: relative;
+    float: right;
+    width: 50%;
+    max-width: 300px;
+    height: auto;
+    overflow: hidden;
+    border-radius: 4px;
+    border: solid 1px #cecece;
+    margin-left: 16px; }
+    .cc-expandingCard-appContainer div.cc-headerImageContainer div.cc-headerImage-thumb {
+      overflow: auto; }
+      .cc-expandingCard-appContainer div.cc-headerImageContainer div.cc-headerImage-thumb img {
+        width: 100%;
+        height: auto; }
 
 /*# sourceMappingURL=global.css.map */

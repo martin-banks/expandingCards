@@ -5,9 +5,11 @@
 	"use strict";
 
 	var util = require('./utility');
+	var checkMobile = require('./checkMobile');
 	var content = require('./content');
 	var bodyTemplate = require('./bodyTemplate');
 	var headerTemplate = require('./headerTemplate');
+	var loadMaterialIcons = require('./loadMaterialIcons')();
 
 	var button = function button(icon) {
 		return '<div class="cc-button">' + icon + '</div>';
@@ -15,13 +17,16 @@
 
 	var cardContent = [headerTemplate(content.cards[0].header), '<div class="cc-cardBodyContainer">' + bodyTemplate(null) + '</div>', button(content.cta.showmore)].join('');
 
+	var isMobile = function isMobile() {
+		return !!checkMobile() ? 'cc-appMobile' : 'cc-appDesktop';
+	};
 	var cardContainer = function cardContainer() {
-		return '\n\t\t<div class="cc-cardContainer" data-state="closed">\n\t\t\t' + cardContent + '\n\t\t</div>\n\t';
+		return '\n\t\t<div class="cc-cardContainer ' + isMobile() + '" data-state="closed">\n\t\t\t' + cardContent + '\n\t\t</div>\n\t';
 	};
 
 	document.querySelector('.cc-expandingCard-appContainer').innerHTML = cardContainer();
 
-	util.delegate('.cc-expandingCard-appContainer', 'click', '.cc-cardContainer', function (e) {
+	util.delegate('.cc-expandingCard-appContainer', 'click', '.cc-button', function (e) {
 		var thisCard = util.closest(e.target, '.cc-cardContainer');
 		var thisKey = thisCard.getAttribute('data-key');
 
@@ -46,7 +51,7 @@
 	});
 })();
 
-},{"./bodyTemplate":2,"./content":4,"./headerTemplate":5,"./utility":11}],2:[function(require,module,exports){
+},{"./bodyTemplate":2,"./checkMobile":3,"./content":5,"./headerTemplate":6,"./loadMaterialIcons":7,"./utility":15}],2:[function(require,module,exports){
 "use strict";
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -76,51 +81,51 @@ module.exports = function (bodyElements) {
 	}
 };
 
-},{"./template_crosshead":6,"./template_image":7,"./template_linkButton":8,"./template_list":9,"./template_par":10}],3:[function(require,module,exports){
-'use strict';
+},{"./template_crosshead":8,"./template_image":10,"./template_linkButton":12,"./template_list":13,"./template_par":14}],3:[function(require,module,exports){
+"use strict";
 
-module.exports = {
-	imagePath: '../images'
+module.exports = function () {
+	var mobile = /iPad|Android|webOS|iPhone|iPod|Blackberry/.test(navigator.userAgent) && !window.MSStream;
+	return mobile ? true : false;
 };
 
 },{}],4:[function(require,module,exports){
 'use strict';
 
 module.exports = {
-	cta: {
-		showmore: 'Show more',
-		showless: 'Show less'
-	},
+	imagePath: '../images'
+};
 
-	titleBlock: {
-		kicker: '',
-		title: 'This is the main title',
-		intro: 'Main Intro',
-		image: ''
+},{}],5:[function(require,module,exports){
+'use strict';
+
+module.exports = {
+	cta: {
+		showmore: 'Show more <i class="material-icons">expand_more</i>',
+		showless: 'Show less <i class="material-icons">expand_less</i>'
 	},
 
 	cards: [{
 		header: {
 			kicker: 'kicker',
 			title: 'Card title',
-			intro: 'card intro',
-			displayImage: {
-				type: 'inline',
-				image: ''
+			intro: 'Card intro Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore voluptatem quaerat, ',
+			image: {
+				type: 'thumb', /*thumb || background*/
+				name: '16x9.jpg'
 			}
 		},
-
-		body: ['Some paragraph of text', {
+		body: [{
 			type: 'image',
 			name: '16x9.jpg',
 			caption: 'Image caption',
 			credit: 'image credit'
-		}, {
-			type: 'list',
-			entries: ['First list item', 'Second list item']
-		}, {
+		}, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum placeat recusandae veritatis aut, rem repudiandae dolorem omnis possimus labore sunt! Expedita cupiditate praesentium voluptatum nemo, repellat fuga ad sequi harum!', {
 			type: 'crosshead',
 			text: 'Crosshead text'
+		}, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum placeat recusandae veritatis aut, rem repudiandae dolorem omnis possimus labore sunt! Expedita cupiditate praesentium voluptatum nemo, repellat fuga ad sequi harum!', {
+			type: 'list',
+			entries: ['First list item', 'Second list item']
 		}, {
 			type: 'linkButton',
 			text: 'link text',
@@ -132,7 +137,7 @@ module.exports = {
 
 };
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 "use strict";
 
 var cardTitle = function cardTitle(text) {
@@ -144,16 +149,39 @@ var cardIntro = function cardIntro(text) {
 var cardKicker = function cardKicker(text) {
 	return '<h6 class="cc-cardKicker">' + text + '</h6>';
 };
+var headerImage = require('./template_headerImage');
 
 module.exports = function (header) {
-	console.log('checking header', header);
-	var content = [!!header.kicker && header.kicker.length > 0 ? cardKicker(header.kicker) : '', !!header.title && header.title.length > 0 ? cardTitle(header.title) : '', !!header.intro && header.intro.length > 0 ? cardIntro(header.intro) : ''].join('');
+	console.log('HEADER CONTENT:', header);
+	var headerText = [!!header.kicker && header.kicker.length > 0 ? cardKicker(header.kicker) : '', !!header.title && header.title.length > 0 ? cardTitle(header.title) : '', !!header.intro && header.intro.length > 0 ? cardIntro(header.intro) : ''].join('');
 
-	console.log('header content tempalted', content);
-	return '<div class="cc-headerContainer">' + content + '</div>';
+	var headerImageContainer = !!header.image.name && header.image.name.length > 0 ? headerImage(header.image) : '';
+
+	return '<div class="cc-headerContainer">\n\t\t' + headerImageContainer + '\n\t\t<div class="cc-headerTextContainer">' + headerText + '</div>\n\t</div>';
 };
 
-},{}],6:[function(require,module,exports){
+},{"./template_headerImage":9}],7:[function(require,module,exports){
+'use strict';
+
+var head = document.getElementsByTagName('head')[0];
+var materialIconFont = document.createElement('link');
+materialIconFont.id = 'cc-materialIconFont';
+materialIconFont.rel = 'stylesheet';
+materialIconFont.type = 'text/css';
+materialIconFont.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
+materialIconFont.media = 'all';
+
+module.exports = function () {
+	var checkForFont = head.querySelector('#cc-materialIconFont');
+	if (!checkForFont) {
+		head.appendChild(materialIconFont);
+	} else {
+		console.log('font exists');
+		return;
+	}
+};
+
+},{}],8:[function(require,module,exports){
 'use strict';
 
 module.exports = function (elem) {
@@ -164,15 +192,39 @@ module.exports = function (elem) {
 	}
 };
 
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
-var caption = function caption(text) {
-	return '<p class="cc-caption">' + text + '</p>';
+var caption = require('./template_imageCaption').caption;
+var credit = require('./template_imageCaption').credit;
+var config = require('./config');
+
+var imageTypes = ['thumb', 'background'];
+
+module.exports = function (image) {
+	var imageType = function imageType() {
+		console.log('checking type');
+		if (!!image.type && image.type.length > 0) {
+			console.log('checking valid type');
+			if (imageTypes.indexOf(image.type) !== -1) {
+				console.log('return type: ', image.type);
+				return '-' + image.type;
+			} else {
+				return '';
+			}
+		}
+	};
+
+	var headerImage = '\n\t\t<div class="cc-headerImage' + imageType() + '">\n\t\t\t<img class="cc-image"\n\t\t\t\talt="' + (!!image.caption && image.caption.length > 0 ? image.caption : '') + '" \n\t\t\t\tsrc="' + config.imagePath + '/' + image.name + '" \n\t\t\t/>\n\t\t</div>\n\t';
+
+	return '\n\t\t<div class="cc-headerImageContainer">\n\t\t\t' + headerImage + '\n\t\t</div>\n\t';
 };
-var credit = function credit(text) {
-	return '<p class="cc-credit">' + text + '</p>';
-};
+
+},{"./config":4,"./template_imageCaption":11}],10:[function(require,module,exports){
+'use strict';
+
+var caption = require('./template_imageCaption').caption;
+var credit = require('./template_imageCaption').credit;
 var config = require('./config');
 
 module.exports = function (image) {
@@ -185,7 +237,22 @@ module.exports = function (image) {
 	return '\n\t\t<div class="cc-inlineImageContainer">\n\t\t\t' + inlineImage + '\n\t\t\t' + captionContainer + '\n\t\t</div>\n\t';
 };
 
-},{"./config":3}],8:[function(require,module,exports){
+},{"./config":4,"./template_imageCaption":11}],11:[function(require,module,exports){
+"use strict";
+
+var caption = function caption(text) {
+	return "<p class=\"cc-caption\">" + text + "</p>";
+};
+var credit = function credit(text) {
+	return "<p class=\"cc-credit\">" + text + "</p>";
+};
+
+module.exports = {
+	caption: caption,
+	credit: credit
+};
+
+},{}],12:[function(require,module,exports){
 'use strict';
 
 var config = require('./config');
@@ -200,7 +267,7 @@ module.exports = function (button) {
 	return buttonTemplate;
 };
 
-},{"./config":3}],9:[function(require,module,exports){
+},{"./config":4}],13:[function(require,module,exports){
 'use strict';
 
 var listItem = function listItem(text) {
@@ -215,7 +282,7 @@ module.exports = function (list) {
 	return '<ul class="cc-listContainer">' + listContent + '</ul>';
 };
 
-},{}],10:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 
 module.exports = function (text) {
@@ -226,7 +293,7 @@ module.exports = function (text) {
 	}
 };
 
-},{}],11:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 'use strict';
 
 var ie = function () {
@@ -279,6 +346,9 @@ function delegate(selector, eventName, targetSelector, listener) {
 	});
 };
 
-module.exports = { delegate: delegate, closest: closest };
+module.exports = {
+	delegate: delegate,
+	closest: closest
+};
 
 },{}]},{},[1]);

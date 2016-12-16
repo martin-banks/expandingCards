@@ -60,4 +60,7 @@ function delegate(selector, eventName, targetSelector, listener) {
 };
 
 
-module.exports = {delegate, closest}
+module.exports = {
+	delegate, 
+	closest
+}

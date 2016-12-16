@@ -7,9 +7,10 @@ $button-height: 32px
 	+sansSerif
 	+transitionQuick
 	box-sizing: border-box
+	overflow: hidden
 
 	.cc-cardContainer
-		+cardWithShadow		
+		+cardWithShadow	
 
 	h2, h4, h6 
 		+sansSerif
@@ -25,7 +26,7 @@ $button-height: 32px
 	
 	h3.cc-crosshead
 		text-transform: uppercase
-		margin-bottom: 8px
+		margin-bottom: 0
 		margin-top: 32px
 
 	h4.cc-cardIntro
@@ -58,6 +59,7 @@ $button-height: 32px
 		height: auto
 		max-height: 0
 		opacity: 0
+		margin-bottom: 16px
 
 	ul.cc-listContainer
 		padding-top: 16px
@@ -69,6 +71,7 @@ $button-height: 32px
 		position: relative
 		border: solid 1px $color-neutral-midlight
 		border-radius: 4px
+		margin-bottom: 24px
 		div.cc-inlineImage
 			img
 				width: 100%
@@ -92,18 +95,30 @@ $button-height: 32px
 
 
 	div.cc-button
-		position: relative
+		position: absolute
 		right: 0
 		bottom: 0
 		display: inline-block
 		width: 100%
-		color: $color-neutral-dark
+		color: $color-neutral-middark
 		text-align: right
-		font-size: 14px
+		font-size: 12px
+		font-weight: 600
 		line-height: 16px
 		letter-spacing: 2px
 		text-transform: uppercase
 		cursor: pointer
+		padding: 16px
+		i.material-icons
+			vertical-align: middle
+			line-height: 16px
+			font-size: 24px
+			margin-left: 8px
+
+	.cc-appDesktop
+		div.cc-button:hover
+			background-color: $color-neutral-light
+			color: $color-neutral-dark
 
 
 	a.cc-linkButton
@@ -132,12 +147,34 @@ $button-height: 32px
 					height: $button-height/2
 					vertical-align: middle
 
-
-		div.cc-buttonTextContainer:hover
-			background-color: $color-neutral-light
-			border-color: $color-neutral-midlight
-			color: $color-neutral-dark
+		.cc-appDesktop
+			div.cc-buttonTextContainer:hover
+				background-color: $color-neutral-light
+				border-color: $color-neutral-midlight
+				color: $color-neutral-dark
 					
+	
+	div.cc-headerContainer
+		margin-bottom: 24px
+		overflow: auto
 
+	div.cc-headerTextContainer
+		position: relative
+
+	div.cc-headerImageContainer
+		position: relative
+		float: right
+		width: 50%
+		max-width: 300px
+		height: auto
+		overflow: hidden
+		border-radius: 4px
+		border: solid 1px $color-neutral-midlight
+		margin-left: 16px
+		div.cc-headerImage-thumb
+			overflow: auto
+			img
+				width: 100%
+				height: auto
 
 

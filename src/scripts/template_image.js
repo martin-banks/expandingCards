@@ -1,5 +1,5 @@
-const caption = text => `<p class="cc-caption">${text}</p>`
-const credit = text => `<p class="cc-credit">${text}</p>`
+const caption = require('./template_imageCaption').caption
+const credit = require('./template_imageCaption').credit
 const config = require('./config')
 
 

@@ -2,9 +2,11 @@
 	"use strict"
 
 	const util = require('./utility')
+	const checkMobile = require('./checkMobile')
 	let content = require('./content')
 	let bodyTemplate = require('./bodyTemplate')
 	let headerTemplate = require('./headerTemplate')
+	const loadMaterialIcons = require('./loadMaterialIcons')()
 
 	let button = (icon)=> `<div class="cc-button">${icon}</div>`
 
@@ -15,14 +17,14 @@
 		button(content.cta.showmore)
 	].join('')
 
-
+	let isMobile = ()=>	!!checkMobile() ? 'cc-appMobile' : 'cc-appDesktop'
 	let cardContainer = ()=>`
-		<div class="cc-cardContainer" data-state="closed">
+		<div class="cc-cardContainer ${isMobile()}" data-state="closed">
 			${cardContent}
 		</div>
 	`
 
-	document.querySelector('.cc-expandingCard-appContainer').innerHTML = cardContainer()
+	document.querySelector(`.cc-expandingCard-appContainer`).innerHTML = cardContainer()
 
 
 
@@ -30,7 +32,7 @@
 
 
 
-	util.delegate('.cc-expandingCard-appContainer', 'click', '.cc-cardContainer', (e)=>{
+	util.delegate('.cc-expandingCard-appContainer', 'click', '.cc-button', (e)=>{
 		let thisCard = util.closest(e.target, '.cc-cardContainer')
 		let thisKey = thisCard.getAttribute('data-key')
 		
